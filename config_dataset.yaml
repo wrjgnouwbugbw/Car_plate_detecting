@@ -1,0 +1,6 @@
+path: /yolo9/data
+train: train
+val: val
+test: test
+names: 
+  0: car_plate
