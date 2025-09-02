@@ -4,11 +4,16 @@ import torch
 torch.cuda.empty_cache()
 
 import os
-os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'max_split_size_mb:512'
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True,max_split_size_mb:256'
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 import torch
 torch.cuda.empty_cache()
 from ultralytics import YOLO
 import configparser
+
+# Установка детерминированного поведения CUDA
+torch.backends.cudnn.benchmark = False
+torch.backends.cudnn.deterministic = True
 
 def train(config):
 	model = YOLO(config["name_model"]) 
